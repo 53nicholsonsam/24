@@ -12,22 +12,16 @@ def solve2(numArray):
         return "false"
 
     if (numArray[0] + numArray[1] == 24):
-        print(str(numArray[0]) + " + " + str(numArray[1]) + " = 24")
         return str(numArray[0]) + " + " + str(numArray[1]) + " = 24"
     if (numArray[0] * numArray[1] == 24):
-        print(str(numArray[0]) + " * " + str(numArray[1]) + " = 24")
         return str(numArray[0]) + " * " + str(numArray[1]) + " = 24"
     if (numArray[0] - numArray[1] == 24):
-        print(str(numArray[0]) + " - " + str(numArray[1]) + " = 24")
         return str(numArray[0]) + " - " + str(numArray[1]) + " = 24"
     if (numArray[0] / numArray[1] == 24):
-        print(str(numArray[0]) + " / " + str(numArray[1]) + " = 24")
         return str(numArray[0]) + " / " + str(numArray[1]) + " = 24"
     if (numArray[1] - numArray[0] == 24):
-        print(str(numArray[1]) + " - " + str(numArray[0]) + " = 24")
         return str(numArray[1]) + " - " + str(numArray[0]) + " = 24"
     if (numArray[1] / numArray[0] == 24):
-        print(str(numArray[1]) + " / " + str(numArray[0]) + " = 24")
         return str(numArray[1]) + " / " + str(numArray[0]) + " = 24"
 
     return "false"
@@ -74,16 +68,12 @@ def solve3(numArray):
         solution = solve2(p)
         if solution != "false":
             if p[3] == "+":
-                print(p)
                 return str(p[2]) + " + " + str(p[4]) + " = " + str(p[2] + p[4]) + ", " + solution
             elif p[3] == "*":
-                print(p)
                 return str(p[2]) + " * " + str(p[4]) + " = " + str(p[2] * p[4]) + ", " + solution
             elif p[3] == "-":
-                print(p)
                 return str(p[2]) + " - " + str(p[4]) + " = " + str(p[2] - p[4]) + ", " + solution
             else:
-                print(p)
                 return str(p[2]) + " / " + str(p[4]) + " = " + str(p[2] / p[4]) + ", " + solution
 
     return "false"
@@ -145,16 +135,12 @@ def solve4(numArray):
         solution = solve3(p)
         if solution != "false":
             if p[4] == "+":
-                print(p)
                 return str(p[3]) + " + " + str(p[5]) + " = " + str(p[3] + p[5]) + ", " + solution
             elif p[4] == "*":
-                print(p)
                 return str(p[3]) + " * " + str(p[5]) + " = " + str(p[3] * p[5]) + ", " + solution
             elif p[4] == "-":
-                print(p)
                 return str(p[3]) + " - " + str(p[5]) + " = " + str(p[3] - p[5]) + ", " + solution
             else:
-                print(p)
                 return str(p[3]) + " / " + str(p[5]) + " = " + str(p[3] / p[5]) + ", " + solution
 
     return "No solution exists to the numbers inputted"
