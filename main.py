@@ -1,13 +1,80 @@
 VALID_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 def solve2(numArray):
-    return "hello"
+    if numArray[0] < 1 or numArray[1] < 1:
+        return "false"
+    solution = ""
+    if (numArray[0] + numArray[1] == 24):
+        print(str(numArray[0]) + " + " + str(numArray[1]) + " = 24")
+        return str(numArray[0]) + " + " + str(numArray[1]) + " = 24"
+    if (numArray[0] * numArray[1] == 24):
+        print(str(numArray[0]) + " * " + str(numArray[1]) + " = 24")
+        return str(numArray[0]) + " * " + str(numArray[1]) + " = 24"
+    if (numArray[0] - numArray[1] == 24):
+        print(str(numArray[0]) + " - " + str(numArray[1]) + " = 24")
+        return str(numArray[0]) + " - " + str(numArray[1]) + " = 24"
+    if (numArray[0] / numArray[1] == 24):
+        print(str(numArray[0]) + " / " + str(numArray[1]) + " = 24")
+        return str(numArray[0]) + " / " + str(numArray[1]) + " = 24"
+    if (numArray[1] - numArray[0] == 24):
+        print(str(numArray[1]) + " - " + str(numArray[0]) + " = 24")
+        return str(numArray[1]) + " - " + str(numArray[0]) + " = 24"
+    if (numArray[1] / numArray[0] == 24):
+        print(str(numArray[1]) + " / " + str(numArray[0]) + " = 24")
+        return str(numArray[1]) + " / " + str(numArray[0]) + " = 24"
+
+    return "false"
 
 def solve3(numArray):
-    return "hello"
+    if numArray[0] < 1 or numArray[1] < 1 or numArray[2] < 1:
+        return "false"
+    solution = ""
+    possibilities = []
+    # addition possibilities, order does not matter
+    possibilities.append([numArray[0] + numArray[1], numArray[2], numArray[0], "+", numArray[1]])
+    possibilities.append([numArray[0] + numArray[2], numArray[1], numArray[0], "+", numArray[2]])
+    possibilities.append([numArray[1] + numArray[2], numArray[0], numArray[1], "+", numArray[2]])
+
+    # multiplication possibilities, order does not matter
+    possibilities.append([numArray[0] * numArray[1], numArray[2], numArray[0], "*", numArray[1]])
+    possibilities.append([numArray[0] * numArray[2], numArray[1], numArray[0], "*", numArray[2]])
+    possibilities.append([numArray[1] * numArray[2], numArray[0], numArray[1], "*", numArray[2]])
+
+    # subtraction possibilities, order matters!
+    possibilities.append([numArray[0] - numArray[1], numArray[2], numArray[0], "-", numArray[1]])
+    possibilities.append([numArray[0] - numArray[2], numArray[1], numArray[0], "-", numArray[2]])
+    possibilities.append([numArray[1] - numArray[0], numArray[2], numArray[1], "-", numArray[0]])
+    possibilities.append([numArray[1] - numArray[2], numArray[0], numArray[1], "-", numArray[2]])
+    possibilities.append([numArray[2] - numArray[0], numArray[1], numArray[2], "-", numArray[0]])
+    possibilities.append([numArray[2] - numArray[1], numArray[0], numArray[2], "-", numArray[1]])
+
+    # division possibilities, order matters!
+    possibilities.append([numArray[0] / numArray[1], numArray[2], numArray[0], "/", numArray[1]])
+    possibilities.append([numArray[0] / numArray[2], numArray[1], numArray[0], "/", numArray[2]])
+    possibilities.append([numArray[1] / numArray[0], numArray[2], numArray[1], "/", numArray[0]])
+    possibilities.append([numArray[1] / numArray[2], numArray[0], numArray[1], "/", numArray[2]])
+    possibilities.append([numArray[2] / numArray[0], numArray[1], numArray[2], "/", numArray[0]])
+    possibilities.append([numArray[2] / numArray[1], numArray[0], numArray[2], "/", numArray[1]])
+
+    for p in possibilities:
+        solution = solve2(p)
+        if solution != "false":
+            if p[3] == "+":
+                print(p)
+                return str(p[2]) + " + " + str(p[4]) + " = " + str(p[2] + p[4]) + ", " + solution
+            elif p[3] == "*":
+                print(p)
+                return str(p[2]) + " * " + str(p[4]) + " = " + str(p[2] * p[4]) + ", " + solution
+            elif p[3] == "-":
+                print(p)
+                return str(p[2]) + " - " + str(p[4]) + " = " + str(p[2] - p[4]) + ", " + solution
+            else:
+                print(p)
+                return str(p[2]) + " / " + str(p[4]) + " = " + str(p[2] / p[4]) + ", " + solution
+
+    return "false"
 
 def solve4(numArray):
-    index = 0
     solution = ""
     possibilities = []
     # addition possibilities, order does not matter
@@ -57,9 +124,18 @@ def solve4(numArray):
     for p in possibilities:
         solution = solve3(p)
         if solution != "false":
-            return p
-        print(p)
-        return
+            if p[4] == "+":
+                print(p)
+                return str(p[3]) + " + " + str(p[5]) + " = " + str(p[3] + p[5]) + ", " + solution
+            elif p[4] == "*":
+                print(p)
+                return str(p[3]) + " * " + str(p[5]) + " = " + str(p[3] * p[5]) + ", " + solution
+            elif p[4] == "-":
+                print(p)
+                return str(p[3]) + " - " + str(p[5]) + " = " + str(p[3] - p[5]) + ", " + solution
+            else:
+                print(p)
+                return str(p[3]) + " / " + str(p[5]) + " = " + str(p[3] / p[5]) + ", " + solution
 
     return "No solution exists to the numbers inputted"
 
@@ -80,4 +156,4 @@ else:
         print("Please input only numbers between 1 and 9 inclusive")
     else:
         solution = solve4(numArray)
-        print(solution)
+        print("final solution: " + solution)
