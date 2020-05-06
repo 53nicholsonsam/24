@@ -1,9 +1,16 @@
+# valid numbers to begin with
 VALID_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 def solve2(numArray):
+    """
+    Given an array of two numbers (and additional elements for how we got there), 
+    see if it is possible to get to 24.
+    If it is, return how it was done. If not, return "false".
+    Zeroes and negative numbers are not allowed.
+    """
     if numArray[0] < 1 or numArray[1] < 1:
         return "false"
-    solution = ""
+
     if (numArray[0] + numArray[1] == 24):
         print(str(numArray[0]) + " + " + str(numArray[1]) + " = 24")
         return str(numArray[0]) + " + " + str(numArray[1]) + " = 24"
@@ -26,9 +33,16 @@ def solve2(numArray):
     return "false"
 
 def solve3(numArray):
+    """
+    Given an array of 3 numbers (and additional elements for how we got there), 
+    call solve2() on all possible combinations of numbers and operations to 
+    see if it is possible to get to 24. Iterate through all possibilities, returning
+    the solution if it is possible, and "false" if it is not.
+    Zeroes and negative numbers not allowed in computation of the solution
+    """
     if numArray[0] < 1 or numArray[1] < 1 or numArray[2] < 1:
         return "false"
-    solution = ""
+
     possibilities = []
     # addition possibilities, order does not matter
     possibilities.append([numArray[0] + numArray[1], numArray[2], numArray[0], "+", numArray[1]])
@@ -75,7 +89,13 @@ def solve3(numArray):
     return "false"
 
 def solve4(numArray):
-    solution = ""
+    """
+    Given an array of 4 numbers, create an array of all possible combinations of numbers and operations.
+    Then, call solve3() on each possibility, which will in turn call solve2() on all of those possibilities
+    to determine if it is possible to get to 24 from the given input. If it is possible, it will return the
+    steps taken to get to the solution. Otherwise, it will return that it is not possible to get to 24
+    from the given input.
+    """
     possibilities = []
     # addition possibilities, order does not matter
     possibilities.append([numArray[0] + numArray[1], numArray[2], numArray[3], numArray[0], "+", numArray[1]])
@@ -139,21 +159,27 @@ def solve4(numArray):
 
     return "No solution exists to the numbers inputted"
 
+# program while loop tries to get to 24 based on user inputted numbers, and exits on "exit" 
+while True:
+    nums = input('Enter 4 numbers between 1 and 9 inclusive, with one space in between each one. Enter "exit" to stop: ')
+    if nums == "exit":
+        break
 
-nums = input("Enter 4 numbers between 1 and 9 inclusive, with one space in between each one: ")
-numArray = nums.strip().split(" ")
+    numArray = nums.strip().split(" ")
 
-if len(numArray) != 4:
-    print("Please provide exactly 4 numbers")
-else:
-    first = numArray[0] = int(numArray[0])
-    second = numArray[1] = int(numArray[1])
-    third = numArray[2] = int(numArray[2])
-    fourth = numArray[3] = int(numArray[3])
-
-    if first not in VALID_NUMBERS or second not in VALID_NUMBERS or \
-        third not in VALID_NUMBERS or fourth not in VALID_NUMBERS:
-        print("Please input only numbers between 1 and 9 inclusive")
+    # must be exactly 4 numbers
+    if len(numArray) != 4:
+        print("Please provide exactly 4 numbers")
     else:
-        solution = solve4(numArray)
-        print("final solution: " + solution)
+        first = numArray[0] = int(numArray[0])
+        second = numArray[1] = int(numArray[1])
+        third = numArray[2] = int(numArray[2])
+        fourth = numArray[3] = int(numArray[3])
+
+        # each number must be 1-9 inclusive
+        if first not in VALID_NUMBERS or second not in VALID_NUMBERS or \
+            third not in VALID_NUMBERS or fourth not in VALID_NUMBERS:
+            print("Please input only numbers between 1 and 9 inclusive")
+        else:
+            solution = solve4(numArray)
+            print(solution)
